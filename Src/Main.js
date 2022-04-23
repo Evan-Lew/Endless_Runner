@@ -4,7 +4,7 @@ let config = {
     type: Phaser.CANVAS,
     width: 1280,
     height: 720,
-    scene: [Play]
+    scene: [ Menu_1, Test , Play ]
 }
 
 var game = new Phaser.Game(config);
@@ -13,6 +13,7 @@ var borderPadding = borderUISize / 3;
 
 // Key inputs
 var keyLeft_P1, keyRight_P1, keyUp_P1, keyDown_P1;
+var keyA, keyD, keyEnter;         //key for menu
 
 // Global variables
 var asteroidCreaded = false;
