@@ -2,11 +2,11 @@ class Spaceship extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
         scene.add.existing(this);
-        this.moveSpeed = 2;
+        this.moveSpeed = 3;
     }
     
     update() {
-        // Player movement
+        // Player 8 direction movement
         var hInput = keyRight_P1.isDown - keyLeft_P1.isDown;
         var vInput = keyDown_P1.isDown - keyUp_P1.isDown;
         var moveDir = (new Phaser.Math.Vector2(hInput, vInput)).normalize();
@@ -16,6 +16,20 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         if(hInput != 0 | vInput != 0) {
             this.x += moveX * this.moveSpeed;
             this.y += moveY * this.moveSpeed;
+        }
+
+        // Player collision vs. borders
+        if (this.x <= 0) {
+            this.x = 0;
+        } 
+        if (this.x + this.width >= game.config.width) {
+            this.x = game.config.width - this.width;
+        }
+        if (this.y <= 0) {
+            this.y = 0;
+        }
+        if (this.y + this.height >= game.config.height) {
+            this.y = game.config.height - this.height;
         }
     }
 }

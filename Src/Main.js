@@ -13,3 +13,11 @@ var borderPadding = borderUISize / 3;
 
 // Key inputs
 var keyLeft_P1, keyRight_P1, keyUp_P1, keyDown_P1;
+
+// Global variables
+var asteroidCreaded = false;
+var player2 = [];
+
+function Vector2(x, y) {
+    return new Phaser.Math.Vector2(x, y);
+}
