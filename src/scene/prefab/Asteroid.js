@@ -7,11 +7,12 @@ class Asteroid extends Phaser.GameObjects.Sprite {
         this.moveDir = new Phaser.Math.Vector2(this.player1Pos.x - this.asteroidPos.x, this.player1Pos.y - this.asteroidPos.y).normalize();
         this.moveSpeed = 1;
         this.acceleration = 0.01;
-        
-        this.lifeTime = 100;
-
+        this.lifeTime = 5;
+        this.scene = scene;
+        this.Spcaeship = scene.Player1;
+        this.isUpdate = true;
         this.clock = scene.time.delayedCall(this.lifeTime * 1000, () => {
-            this.destroy();
+            this.isUpdate = false;
         })
     }
     
@@ -39,6 +40,15 @@ class Asteroid extends Phaser.GameObjects.Sprite {
             this.moveDir = this.moveDir.reflect(Vector2(0, -1));
         }
 
+        // Aseteroid Collision vs. Spaceship
+        // Using AABB Collision
+        if (   this.x < this.Spcaeship.x + this.Spcaeship.width
+            && this.x + this.width > this.Spcaeship.x 
+            && this.y < this.Spcaeship.y + this.Spcaeship.height
+            && this.y + this.height > this.Spcaeship.y) {
+                this.Spcaeship.life -= 1;
+                this.isUpdate = false;
+            }
         
     }
 

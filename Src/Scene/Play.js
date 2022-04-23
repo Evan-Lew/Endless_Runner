@@ -53,13 +53,21 @@ class Play extends Phaser.Scene {
     }
 
     update() {
-        this.Player1.update();
-        if(asteroidCreaded) {
-            for (var i = 0; i < player2.length; i++) {
-                player2[i].update();
+        if (this.Player1.life >= 0) {
+            this.Player1.update();
+            if(asteroidCreaded) {
+                for (var i = 0; i < player2.length; i++) {
+                    if (player2[i].isUpdate === true) {
+                        player2[i].update();
+                    } else {
+                        player2[i].y = 2000;
+                        player2.splice(i,1);
+                    }
+                }
             }
+        } else {
+            
         }
-
     }
 
 

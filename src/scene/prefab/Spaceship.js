@@ -3,6 +3,11 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         super(scene, x, y, texture, frame);
         scene.add.existing(this);
         this.moveSpeed = 3;
+        this.minSpeed = 3;
+        this.maxSpeed = 6;
+        this.acceleration = 0.01;
+        this.isMoving = false;
+        this.life = 5;
     }
     
     update() {
@@ -16,6 +21,12 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         if(hInput != 0 | vInput != 0) {
             this.x += moveX * this.moveSpeed;
             this.y += moveY * this.moveSpeed;
+            this.isMoving = true;
+        }
+        if (this.isMoving === true && this.moveSpeed <= this.maxSpeed) {
+            this.moveSpeed += this.acceleration;
+        } else {
+            this.moveSpeed = this.minSpeed;
         }
 
         // Player collision vs. borders
