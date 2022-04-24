@@ -4,17 +4,25 @@ class Play extends Phaser.Scene {
     }
 
     preload() {
+        // Load sprites
         this.load.image("spaceship", "assets/test_spaceship.png");
         this.load.image("asteroid", "assets/test_asteroid.png");
+        this.load.image('starfield', './assets/temp_starfield.png');
     }
 
     create() {
         // ----------Game/Enviroment settings----------
     
+        // Background
+        this.starfield = this.add.tileSprite(0, 0, 1280, 720, 'starfield').setOrigin(0, 0);
+
         // Border
         var border = this.add.graphics();
         border.lineStyle(2, 0x0033ff, 1);
         border.strokeRoundedRect(0, 0, 1280, 720, 7);
+
+        
+
 
         // --------------------------------------------
 
@@ -53,6 +61,12 @@ class Play extends Phaser.Scene {
     }
 
     update() {
+
+        // -------------Background---------------
+        this.starfield.tilePositionY -= 4;
+
+
+
         if (this.Player1.life >= 0) {
             this.Player1.update();
             if(asteroidCreaded) {
