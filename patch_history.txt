@@ -3,3 +3,4 @@ Update menu scene
 
 4/23 3:10
 Combined Art and Assets folder and renamed files to lowercase
+Added temp background
