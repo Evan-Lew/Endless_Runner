@@ -1,3 +1,6 @@
+4/24
+Fixed the spaceship movemnt, the acceleration now works correctly. 
+
 4/23
 Update menu scene
 
