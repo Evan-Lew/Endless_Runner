@@ -4,7 +4,7 @@ let config = {
     type: Phaser.CANVAS,
     width: 1280,
     height: 720,
-    scene: [ Menu_1, Test , Play ]
+    scene: [ Menu_1, Play_solo , Play ]
 }
 
 var game = new Phaser.Game(config);
@@ -18,6 +18,7 @@ var keyA, keyD, keyEnter;         //key for menu
 // Global variables
 var asteroidCreaded = false;
 var player2 = [];
+var ai = [];
 
 function Vector2(x, y) {
     return new Phaser.Math.Vector2(x, y);

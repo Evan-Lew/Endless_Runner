@@ -43,9 +43,9 @@ class Menu_1 extends Phaser.Scene {
         //enter key interaction
         if (Phaser.Input.Keyboard.JustDown(keyEnter) ){
             if(this.arrow.locate == 1){ 
-                this.scene.start("playScene");
+                this.scene.start("playSoloScene");
             }else if(this.arrow.locate == 2){
-                console.log('TO DO: DUO');
+                this.scene.start("playScene");
             }else if(this.arrow.locate == 3){
                 console.log('TO DO: CREDIT');
             }else if(this.arrow.locate == 4){

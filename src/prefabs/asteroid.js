@@ -7,7 +7,7 @@ class Asteroid extends Phaser.GameObjects.Sprite {
         this.moveDir = new Phaser.Math.Vector2(this.player1Pos.x - this.asteroidPos.x, this.player1Pos.y - this.asteroidPos.y).normalize();
         this.moveSpeed = 1;
         this.acceleration = 0.01;
-        this.lifeTime = 5;
+        this.lifeTime = 15;
         this.scene = scene;
         this.Spcaeship = scene.Player1;
         this.isUpdate = true;
