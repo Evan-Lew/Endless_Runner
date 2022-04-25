@@ -18,14 +18,19 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         var moveX = moveDir.dot(new Phaser.Math.Vector2(1, 0));
         var moveY = moveDir.dot(new Phaser.Math.Vector2(0, 1));
 
-        if(hInput != 0 | vInput != 0) {
+        if (hInput != 0 | vInput != 0) {
             this.x += moveX * this.moveSpeed;
             this.y += moveY * this.moveSpeed;
             this.isMoving = true;
         }
+        
+        if (hInput === 0 && vInput === 0) {
+            this.isMoving = false;
+        }
+
         if (this.isMoving === true && this.moveSpeed <= this.maxSpeed) {
             this.moveSpeed += this.acceleration;
-        } else {
+        } else if (this.isMoving === false){
             this.moveSpeed = this.minSpeed;
         }
 
