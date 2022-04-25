@@ -18,8 +18,11 @@ class Play_solo extends Phaser.Scene {
         this.spawnTime = 1;             // every x seconds, Asteroid will be spawned
         this.gameOver = false;          // GAME OVER flag
         this.expertMode = false;        // flag determine if expert mode is on or off
-        this.timePassed = 0;            // used to calculate total time has passed. start from 0
-        //   +1 every second
+        this.timePassed = 0;            // used to calculate total time has passed. start from 0 +1 every second
+        
+        this.generationFrequency = 2000;    //generate Asteroid every num/1000 seconds;
+        this.expertStartTime = 10000;       //expert mode starts at num/1000 seconds;
+
         this.randomNum = 0;             // random number used for spawning location
         this.randomNum2 = 0;
         this.randomArr = [];
@@ -81,7 +84,7 @@ class Play_solo extends Phaser.Scene {
         //  run everycertain second, spawn the asteroid
         //      novice spawn 1 Asteroid at a time
         this.timer_spawnTimer_novice = this.time.addEvent({    
-            delay: 2000,                                               //every 3 seconds call loop below
+            delay: this.generationFrequency,                                               //every 3 seconds call loop below
             callback: () => {
                 {
                     if (this.gameOver) {
@@ -98,10 +101,10 @@ class Play_solo extends Phaser.Scene {
         });//novice generator end
 
         //  expert spawn 2 Asteroids at a time
-        this.timer_runDelay_expert = this.time.delayedCall(10000, () => { 
+        this.timer_runDelay_expert = this.time.delayedCall(this.expertStartTime, () => { 
             this.expertMode = true;
             this.timer_spawnTimer_expert = this.time.addEvent({    
-                delay: 2000,                                               //every second call loop below
+                delay: this.generationFrequency,                                               //every second call loop below
                 callback: () => {
                     {
                         if (this.gameOver) {
