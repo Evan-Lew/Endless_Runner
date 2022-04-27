@@ -10,7 +10,7 @@ class Menu_1 extends Phaser.Scene {
         this.load.audio('sfx_select', './assets/select_menu.mp3');
     
         // preload background
-        this.load.image('Menu_background', './assets/EndlessRunner1.png');
+        this.load.image('Menu_background', './assets/EndlessRunner1.2.png');
         // preload arrow 
         this.load.image('Menu_arrow', './assets/arrow.png')
     }
