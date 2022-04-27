@@ -14,6 +14,8 @@ class Asteroid extends Phaser.GameObjects.Sprite {
         this.clock = scene.time.delayedCall(this.lifeTime * 1000, () => {
             this.isUpdate = false;
         })
+
+        this.sfx_asteroid = scene.sound.add('sfx_rock_impact', {volume: 2});
     }
     
     update() {
@@ -28,15 +30,19 @@ class Asteroid extends Phaser.GameObjects.Sprite {
         // Asteroid Collision vs. borders
         // The Vector2() function is defined in Main.js
         if (this.x + this.width >= game.config.width) {
+            this.sfx_asteroid.play();
             this.moveDir = this.moveDir.reflect(Vector2(-1,0));
         } 
         if (this.x <= 0) {
+            this.sfx_asteroid.play();
             this.moveDir = this.moveDir.reflect(Vector2(1, 0));
         } 
         if (this.y + this.height >= game.config.height) {
+            this.sfx_asteroid.play();
             this.moveDir = this.moveDir.reflect(Vector2(0, 1));
         } 
         if (this.y <= 0) {
+            this.sfx_asteroid.play();
             this.moveDir = this.moveDir.reflect(Vector2(0, -1));
         }
 

@@ -1,5 +1,6 @@
 4/26
 Added more finished background, asteroid, and ship
+Added temp asteroid sfx when colliding with the border
 
 4/25
 Update solo version of game

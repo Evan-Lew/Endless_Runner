@@ -4,12 +4,9 @@ class Menu_1 extends Phaser.Scene {
     }
 
     preload() {
-        // load audio example
-        // this.load.audio('sfx_select', './assets/assets_blip_select12.wav');
-
-    }
-
-    preload() {
+        // Load sfx
+        this.load.audio('sfx_rock_impact', './assets/rock_impact.wav');
+    
         // preload background
         this.load.image('Menu_background', './assets/EndlessRunner1.png');
         // preload arrow 
@@ -42,7 +39,7 @@ class Menu_1 extends Phaser.Scene {
 
         //enter key interaction
         if (Phaser.Input.Keyboard.JustDown(keyEnter) ){
-            if(this.arrow.locate == 1){ 
+            if(this.arrow.locate == 1){
                 this.scene.start("playSoloScene");
             }else if(this.arrow.locate == 2){
                 this.scene.start("playScene");
