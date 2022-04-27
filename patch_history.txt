@@ -1,5 +1,5 @@
 4/26
-Added more finished background
+Added more finished background, asteroid, and ship
 
 4/25
 Update solo version of game

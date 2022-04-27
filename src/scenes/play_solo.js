@@ -6,7 +6,7 @@ class Play_solo extends Phaser.Scene {
 
     preload() {
         // ----------Load Sprites----------
-        this.load.image("spaceship", "assets/test_spaceship.png");
+        //this.load.image("spaceship", "assets/test_spaceship.png");
         //this.load.image("asteroid", "assets/test_asteroid.png");
 
         // Stars
@@ -16,6 +16,8 @@ class Play_solo extends Phaser.Scene {
         this.load.image('planet', './assets/planet_1.png');
         // Asteroid
         this.load.image('asteroid', './assets/animated_asteroid.png');
+        // Spaceship
+        this.load.image("spaceship", "assets/spaceship.png");
     }
 
     create() {
@@ -138,8 +140,8 @@ class Play_solo extends Phaser.Scene {
     update() {
 
         // -------------Background---------------------
-        this.pink_starfield.tilePositionY -= 3.75;
-        this.blue_starfield.tilePositionY -= 2.75;
+        this.pink_starfield.tilePositionY -= 2.5;
+        this.blue_starfield.tilePositionY -= 1.5;
         this.planet.tilePositionY -= 1;
 
         // ----------Game/Enviroment update------------
