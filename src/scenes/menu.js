@@ -26,7 +26,7 @@ class Menu_1 extends Phaser.Scene {
         // background load, may be used for animation
         this.background = this.add.tileSprite(0, 0, 1280, 720, 'Menu_background').setOrigin(0, 0);
         // load arrow
-        this.arrow = new Menu_arrow(this, 340, 610, 'Menu_arrow').setOrigin(0, 0);
+        this.arrow = new Menu_arrow(this, 310, 610, 'Menu_arrow').setOrigin(0, 0);
         
 
     }

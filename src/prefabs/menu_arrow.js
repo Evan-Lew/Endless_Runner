@@ -6,9 +6,9 @@ class Menu_arrow extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);
         // var declare
         this.locate = 1;              //start 1, duo 2, credit 3, quit 4
-        this.moveSpeed_12 = 170;
-        this.moveSpeed_23 = 170;
-        this.moveSpeed_34 = 180;
+        this.moveSpeed_12 = 195;
+        this.moveSpeed_23 = 200;
+        this.moveSpeed_34 = 160;
         //add sound effect
         //this.sfxRocket = scene.sound.add('sfx_rocket');
     }
