@@ -1,3 +1,6 @@
+4/27
+Updated title screen and planets
+
 4/26
 Added more finished background, asteroid, and ship
 Added temp asteroid sfx when colliding with the border

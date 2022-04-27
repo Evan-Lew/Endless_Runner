@@ -37,7 +37,7 @@ class Play_solo extends Phaser.Scene {
         this.randomArr = [];
 
         // Background
-        this.planet = this.add.tileSprite(0, 0, 300, 720, 'planet').setOrigin(0, 0);
+        this.planet = this.add.tileSprite(0, 0, 1280, 720, 'planet').setOrigin(0, 0);
         this.blue_starfield = this.add.tileSprite(0, 0, 1280, 720, 'blue_starfield').setOrigin(0, 0);
         this.pink_starfield = this.add.tileSprite(0, 0, 1280, 720, 'pink_starfield').setOrigin(0, 0);
         
