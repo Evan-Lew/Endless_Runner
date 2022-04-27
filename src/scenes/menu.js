@@ -5,7 +5,9 @@ class Menu_1 extends Phaser.Scene {
 
     preload() {
         // Load sfx
-        this.load.audio('sfx_rock_impact', './assets/rock_impact.wav');
+        //this.load.audio('sfx_rock_impact', './assets/rock_impact.wav');
+        this.load.audio('sfx_rock_impact', './assets/asteroid_pass.mp3');
+        this.load.audio('sfx_select', './assets/select_menu.mp3');
     
         // preload background
         this.load.image('Menu_background', './assets/EndlessRunner1.png');
@@ -40,12 +42,16 @@ class Menu_1 extends Phaser.Scene {
         //enter key interaction
         if (Phaser.Input.Keyboard.JustDown(keyEnter) ){
             if(this.arrow.locate == 1){
+                this.sound.play('sfx_select');
                 this.scene.start("playSoloScene");
             }else if(this.arrow.locate == 2){
+                this.sound.play('sfx_select');
                 this.scene.start("playScene");
             }else if(this.arrow.locate == 3){
+                this.sound.play('sfx_select');
                 console.log('TO DO: CREDIT');
             }else if(this.arrow.locate == 4){
+                this.sound.play('sfx_select');
                 close();
             }//inner if end
         }//if end

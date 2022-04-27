@@ -15,7 +15,7 @@ class Asteroid extends Phaser.GameObjects.Sprite {
             this.isUpdate = false;
         })
 
-        this.sfx_asteroid = scene.sound.add('sfx_rock_impact', {volume: 2});
+        this.sfx_asteroid = scene.sound.add('sfx_rock_impact');
     }
     
     update() {
