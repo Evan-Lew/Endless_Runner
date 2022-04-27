@@ -1,3 +1,6 @@
+4/26
+Added more finished background
+
 4/25
 Update solo version of game
 Add feature "Novice mode, which starts from 0 second to 10 second, generate 1 asteroids from 8 random direction"
@@ -9,6 +12,6 @@ Fixed the spaceship movemnt, the acceleration now works correctly.
 4/23
 Update menu scene
 
-4/23 3:10
+4/23
 Combined Art and Assets folder and renamed files to lowercase
 Added temp background

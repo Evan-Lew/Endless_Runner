@@ -8,7 +8,12 @@ class Play_solo extends Phaser.Scene {
         // Load sprites
         this.load.image("spaceship", "assets/test_spaceship.png");
         this.load.image("asteroid", "assets/test_asteroid.png");
-        this.load.image('starfield', './assets/temp_starfield.png');
+
+        // Stars
+        this.load.image('pink_starfield', './assets/pink_starfield.png');
+        this.load.image('blue_starfield', './assets/blue_starfield.png');
+        // Planet
+        this.load.image('planet', './assets/planet_1.png');
     }
 
     create() {
@@ -28,7 +33,11 @@ class Play_solo extends Phaser.Scene {
         this.randomArr = [];
 
         // Background
-        this.starfield = this.add.tileSprite(0, 0, 1280, 720, 'starfield').setOrigin(0, 0);
+        this.planet = this.add.tileSprite(0, 0, 300, 720, 'planet').setOrigin(0, 0);
+        this.blue_starfield = this.add.tileSprite(0, 0, 1280, 720, 'blue_starfield').setOrigin(0, 0);
+        this.pink_starfield = this.add.tileSprite(0, 0, 1280, 720, 'pink_starfield').setOrigin(0, 0);
+        
+        
 
         // Border
         var border = this.add.graphics();
@@ -127,7 +136,9 @@ class Play_solo extends Phaser.Scene {
     update() {
 
         // -------------Background---------------------
-        this.starfield.tilePositionY -= 4;
+        this.pink_starfield.tilePositionY -= 3.75;
+        this.blue_starfield.tilePositionY -= 2.75;
+        this.planet.tilePositionY -= 1;
 
         // ----------Game/Enviroment update------------
 
