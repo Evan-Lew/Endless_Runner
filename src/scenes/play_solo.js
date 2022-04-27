@@ -5,15 +5,17 @@ class Play_solo extends Phaser.Scene {
     }
 
     preload() {
-        // Load sprites
+        // ----------Load Sprites----------
         this.load.image("spaceship", "assets/test_spaceship.png");
-        this.load.image("asteroid", "assets/test_asteroid.png");
+        //this.load.image("asteroid", "assets/test_asteroid.png");
 
         // Stars
         this.load.image('pink_starfield', './assets/pink_starfield.png');
         this.load.image('blue_starfield', './assets/blue_starfield.png');
         // Planet
         this.load.image('planet', './assets/planet_1.png');
+        // Asteroid
+        this.load.image('asteroid', './assets/animated_asteroid.png');
     }
 
     create() {
