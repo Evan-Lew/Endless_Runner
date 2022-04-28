@@ -9,6 +9,9 @@ class Play_solo extends Phaser.Scene {
         //this.load.image("spaceship", "assets/test_spaceship.png");
         //this.load.image("asteroid", "assets/test_asteroid.png");
 
+        //audio
+        this.load.audio('sfx_rock_impact', './assets/asteroid_pass.mp3');
+
         // Stars
         this.load.image('pink_starfield', './assets/pink_starfield.png');
         this.load.image('blue_starfield', './assets/blue_starfield.png');
@@ -17,8 +20,10 @@ class Play_solo extends Phaser.Scene {
         // Asteroid
         this.load.image('asteroid', './assets/animated_asteroid.png');
         // Spaceship
-        this.load.image("spaceship", "assets/spaceship.png");
-    }
+        this.load.image("spaceship", "./assets/spaceship.png");
+        // life (5 heart)
+        this.load.spritesheet('indicator_life', './assets/heart.png', { frameWidth: 172, frameHeight: 32 });
+    }//
 
     create() {
         // ----------Game/Enviroment settings----------
@@ -28,7 +33,7 @@ class Play_solo extends Phaser.Scene {
         this.gameOver = false;          // GAME OVER flag
         this.expertMode = false;        // flag determine if expert mode is on or off
         this.timePassed = 0;            // used to calculate total time has passed. start from 0 +1 every second
-        
+
         this.generationFrequency = 2000;    //generate Asteroid every num/1000 seconds;
         this.expertStartTime = 10000;       //expert mode starts at num/1000 seconds;
 
@@ -40,13 +45,57 @@ class Play_solo extends Phaser.Scene {
         this.planet = this.add.tileSprite(0, 0, 1280, 720, 'planet').setOrigin(0, 0);
         this.blue_starfield = this.add.tileSprite(0, 0, 1280, 720, 'blue_starfield').setOrigin(0, 0);
         this.pink_starfield = this.add.tileSprite(0, 0, 1280, 720, 'pink_starfield').setOrigin(0, 0);
-        
-        
+
+
 
         // Border
         var border = this.add.graphics();
         border.lineStyle(2, 0x0033ff, 1);
         border.strokeRoundedRect(0, 0, 1280, 720, 7);
+
+        // UI
+        // HP 
+        this.anims.create({
+            key: "hp5",
+            frameRate: 1,
+            frames: this.anims.generateFrameNumbers('indicator_life', { start: 0, end: 0 }),
+            repeat: 1
+        });
+        this.anims.create({
+            key: "hp4",
+            frameRate: 1,
+            frames: this.anims.generateFrameNumbers('indicator_life', { start: 1, end: 1 }),
+            repeat: 1
+        });
+        this.anims.create({
+            key: "hp3",
+            frameRate: 1,
+            frames: this.anims.generateFrameNumbers('indicator_life', { start: 2, end: 2 }),
+            repeat: 1
+        });
+        this.anims.create({
+            key: "hp2",
+            frameRate: 1,
+            frames: this.anims.generateFrameNumbers('indicator_life', { start: 3, end: 3 }),
+            repeat: 1
+        });
+        this.anims.create({
+            key: "hp1",
+            frameRate: 1,
+            frames: this.anims.generateFrameNumbers('indicator_life', { start: 4, end: 4 }),
+            repeat: 1
+        });
+        this.anims.create({
+            key: "hp0",
+            frameRate: 1,
+            frames: this.anims.generateFrameNumbers('indicator_life', { start: 5, end: 5 }),
+            repeat: 1
+        });
+        // display hp init
+        this.life_bar = this.add.sprite(100, 50, 'indicator_life');
+        this.life_bar.play("hp5");
+        // display timer init
+        this.display_timePassed = this.add.text(90, 70, this.timePassed, { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '32px', color: '#FFFFFF', });
 
 
         // timePassed increment
@@ -55,7 +104,10 @@ class Play_solo extends Phaser.Scene {
             callback: () => {
                 {
                     if (!this.gameOver) {
+                        this.display_timePassed.destroy();   //destory previous timer
                         this.timePassed++;                   //increment timePassed
+                        //display runtime timer
+                        this.display_timePassed = this.add.text(90, 70, this.timePassed, { align: 'center', fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '32px', color: '#FFFFFF', });
 
                     } else {
                         this.timer_localTimer.remove(false); //turn off clockEvent  
@@ -96,14 +148,14 @@ class Play_solo extends Phaser.Scene {
         //  Asteroid generator function
         //  run everycertain second, spawn the asteroid
         //      novice spawn 1 Asteroid at a time
-        this.timer_spawnTimer_novice = this.time.addEvent({    
+        this.timer_spawnTimer_novice = this.time.addEvent({
             delay: this.generationFrequency,                                               //every 3 seconds call loop below
             callback: () => {
                 {
                     if (this.gameOver) {
                         this.timer_spawnTimer_novice.remove(false);    //turn off clockEvent if game is over
                     }// if end
-                    if (this.expertMode){
+                    if (this.expertMode) {
                         this.timer_spawnTimer_novice.remove(false);    //turn off clockEvent if expert mode is on
                     }
                     this.noviceGenerator(this.randomNum);
@@ -114,9 +166,9 @@ class Play_solo extends Phaser.Scene {
         });//novice generator end
 
         //  expert spawn 2 Asteroids at a time
-        this.timer_runDelay_expert = this.time.delayedCall(this.expertStartTime, () => { 
+        this.timer_runDelay_expert = this.time.delayedCall(this.expertStartTime, () => {
             this.expertMode = true;
-            this.timer_spawnTimer_expert = this.time.addEvent({    
+            this.timer_spawnTimer_expert = this.time.addEvent({
                 delay: this.generationFrequency,                                               //every second call loop below
                 callback: () => {
                     {
@@ -132,9 +184,6 @@ class Play_solo extends Phaser.Scene {
         }, null, this);//expert delay end
 
         // --------------------------------------------
-
-
-
     }
 
     update() {
@@ -145,12 +194,7 @@ class Play_solo extends Phaser.Scene {
         this.planet.tilePositionY -= 1;
 
         // ----------Game/Enviroment update------------
-
-        //  gameOver check
-        if (this.Player1.life <= 0) {
-            this.gameOver = true;
-        }
-
+        // asteroid spawn
         if (!this.gameOver) {
             this.Player1.update();
             if (asteroidCreaded) {
@@ -166,7 +210,26 @@ class Play_solo extends Phaser.Scene {
         } else {
 
         }
+
+        //  gameOver check + hp change
+        if (this.Player1.life <= 0) {
+            this.life_bar.play("hp0");
+            this.gameOver = true;
+        } else if (this.Player1.life == 5) {
+            this.life_bar.play("hp5");
+        } else if (this.Player1.life == 4) {
+            this.life_bar.play("hp4");
+        } else if (this.Player1.life == 3) {
+            this.life_bar.play("hp3");
+        } else if (this.Player1.life == 2) {
+            this.life_bar.play("hp2");
+        } else if (this.Player1.life == 1) {
+            this.life_bar.play("hp1");
+        }//if end
     }//update end
+
+
+
 
     //  Helper function that determine the spawning point
     //      argument: input_randomNum: number from 1-8, which number indicate a pair of number below

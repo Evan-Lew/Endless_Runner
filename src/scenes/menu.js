@@ -5,8 +5,7 @@ class Menu_1 extends Phaser.Scene {
 
     preload() {
         // Load sfx
-        //this.load.audio('sfx_rock_impact', './assets/rock_impact.wav');
-        this.load.audio('sfx_rock_impact', './assets/asteroid_pass.mp3');
+
         this.load.audio('sfx_select', './assets/select_menu.mp3');
     
         // preload background
