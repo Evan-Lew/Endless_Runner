@@ -20,6 +20,7 @@ class Menu_1 extends Phaser.Scene {
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyEnter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+        keyESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
         //      init end
 
         // background load, may be used for animation
@@ -36,7 +37,6 @@ class Menu_1 extends Phaser.Scene {
         //update arrow
         this.arrow.update();          
 
- 
 
         //enter key interaction
         if (Phaser.Input.Keyboard.JustDown(keyEnter) ){
@@ -45,7 +45,7 @@ class Menu_1 extends Phaser.Scene {
                 this.scene.start("playSoloScene");
             }else if(this.arrow.locate == 2){
                 this.sound.play('sfx_select');
-                this.scene.start("playScene");
+                this.scene.start("tutorialScene");
             }else if(this.arrow.locate == 3){
                 this.sound.play('sfx_select');
                 console.log('TO DO: CREDIT');

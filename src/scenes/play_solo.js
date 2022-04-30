@@ -11,6 +11,7 @@ class Play_solo extends Phaser.Scene {
 
         //audio
         this.load.audio('sfx_rock_impact', './assets/asteroid_pass.mp3');
+        this.load.audio('sfx_select', './assets/select_menu.mp3');
 
         // Stars
         this.load.image('pink_starfield', './assets/pink_starfield.png');
@@ -136,6 +137,8 @@ class Play_solo extends Phaser.Scene {
         keyRight_P1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyUp_P1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         keyDown_P1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        keyESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 
         // --------------------------------------------
 
@@ -188,14 +191,14 @@ class Play_solo extends Phaser.Scene {
 
     update() {
 
-        // -------------Background---------------------
-        this.pink_starfield.tilePositionY -= 2.5;
-        this.blue_starfield.tilePositionY -= 1.5;
-        this.planet.tilePositionY -= 1;
-
-        // ----------Game/Enviroment update------------
-        // asteroid spawn
         if (!this.gameOver) {
+            // -------------Background---------------------
+            this.pink_starfield.tilePositionY -= 2.5;
+            this.blue_starfield.tilePositionY -= 1.5;
+            this.planet.tilePositionY -= 1;
+
+            // ----------Game/Enviroment update------------
+            // asteroid spawn
             this.Player1.update();
             if (asteroidCreaded) {
                 for (var i = 0; i < ai.length; i++) {
@@ -207,25 +210,25 @@ class Play_solo extends Phaser.Scene {
                     }
                 }
             }
+            
+            //  gameOver check + hp change
+            if (this.Player1.life <= 0) {
+                this.life_bar.play("hp0");
+                this.gameOver = true;
+            } else if (this.Player1.life == 5) {
+                this.life_bar.play("hp5");
+            } else if (this.Player1.life == 4) {
+                this.life_bar.play("hp4");
+            } else if (this.Player1.life == 3) {
+                this.life_bar.play("hp3");
+            } else if (this.Player1.life == 2) {
+                this.life_bar.play("hp2");
+            } else if (this.Player1.life == 1) {
+                this.life_bar.play("hp1");
+            }//if end
         } else {
-
+            this.endGame();
         }
-
-        //  gameOver check + hp change
-        if (this.Player1.life <= 0) {
-            this.life_bar.play("hp0");
-            this.gameOver = true;
-        } else if (this.Player1.life == 5) {
-            this.life_bar.play("hp5");
-        } else if (this.Player1.life == 4) {
-            this.life_bar.play("hp4");
-        } else if (this.Player1.life == 3) {
-            this.life_bar.play("hp3");
-        } else if (this.Player1.life == 2) {
-            this.life_bar.play("hp2");
-        } else if (this.Player1.life == 1) {
-            this.life_bar.play("hp1");
-        }//if end
     }//update end
 
 
@@ -302,6 +305,27 @@ class Play_solo extends Phaser.Scene {
         }//for end
         this.locationAssign(randomNum);                  //generate two Asteroid
         this.locationAssign(randomNum2);
+    }
+
+    endGame() {
+        let gameOverConfig = {
+            fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+            fontSize: "60px",
+            color: "#DF2121",
+            align: "center"
+        }
+
+        this.add.text(game.config.width/2, game.config.height/2, "Game Over!\nPress {R} To Restart\nPress {ESC} To Return To Menu", gameOverConfig).setOrigin(0.5);
+
+        if (keyESC.isDown) {
+            this.sound.play('sfx_select');
+            this.scene.start("menuScene_1");
+        }
+        if (Phaser.Input.Keyboard.JustDown(keyR)) {
+            this.sound.play('sfx_select');
+            this.scene.restart();
+        }
+
     }
 
 }
