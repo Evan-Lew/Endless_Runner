@@ -1,8 +1,19 @@
+@font-face {
+    font-family: "PixelFont";
+    src: url("pixelFont.ttf");
+}
+
+
 body {
     background-color: rgb(29, 29, 29);
+    font-family: "PixelFont";
 }
 
 canvas {
     display: block;
     margin: auto;
+}
+
+#game {
+    font-family: 'PixelFont';
 }

@@ -9,7 +9,7 @@ class Tutorial extends Phaser.Scene {
     
     create() {
         let tutorialConfig = {
-            fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+            fontFamily: "PixelFont",
             fontSize: "60px",
             color: "#FFFFFF"
         }

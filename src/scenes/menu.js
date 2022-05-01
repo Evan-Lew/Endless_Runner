@@ -56,6 +56,5 @@ class Menu_1 extends Phaser.Scene {
         }//if end
 
 
-
     }
 }

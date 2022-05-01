@@ -16,6 +16,7 @@ class Asteroid extends Phaser.GameObjects.Sprite {
         })
 
         this.sfx_asteroid = scene.sound.add('sfx_rock_impact');
+        this.sfx_onHit = scene.sound.add("sfx_spaceshipOnHit");
     }
     
     update() {
@@ -54,6 +55,8 @@ class Asteroid extends Phaser.GameObjects.Sprite {
             && this.y + this.height > this.Spcaeship.y) {
                 this.Spcaeship.life -= 1;
                 this.isUpdate = false;
+                this.scene.cameras.main.shake(100, 0.005);
+                this.scene.sound.play("sfx_spaceshipOnHit");
             }
         
     }

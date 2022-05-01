@@ -11,6 +11,7 @@ class Play_solo extends Phaser.Scene {
 
         //audio
         this.load.audio('sfx_rock_impact', './assets/asteroid_pass.mp3');
+        this.load.audio("sfx_spaceshipOnHit", "./assets/sfx_onHIt.wav");
         this.load.audio('sfx_select', './assets/select_menu.mp3');
 
         // Stars
@@ -48,11 +49,12 @@ class Play_solo extends Phaser.Scene {
         this.pink_starfield = this.add.tileSprite(0, 0, 1280, 720, 'pink_starfield').setOrigin(0, 0);
 
 
-
         // Border
-        var border = this.add.graphics();
-        border.lineStyle(2, 0x0033ff, 1);
-        border.strokeRoundedRect(0, 0, 1280, 720, 7);
+        var graphics = this.add.graphics();
+        graphics.lineStyle(2, 0x0033ff, 1);
+        graphics.strokeRoundedRect(0, 0, 1280, 720, 7);
+        graphics.lineStyle(2, 0xDF2121, 0);
+        graphics.strokeRoundedRect(0, 0, 1280, 720, 7);
 
         // UI
         // HP 
@@ -190,7 +192,7 @@ class Play_solo extends Phaser.Scene {
     }
 
     update() {
-
+        console.log(this);
         if (!this.gameOver) {
             // -------------Background---------------------
             this.pink_starfield.tilePositionY -= 2.5;
@@ -210,6 +212,7 @@ class Play_solo extends Phaser.Scene {
                     }
                 }
             }
+            
             
             //  gameOver check + hp change
             if (this.Player1.life <= 0) {
@@ -309,13 +312,16 @@ class Play_solo extends Phaser.Scene {
 
     endGame() {
         let gameOverConfig = {
-            fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
+            fontFamily: 'PixelFont',
             fontSize: "60px",
             color: "#DF2121",
-            align: "center"
+    
         }
 
-        this.add.text(game.config.width/2, game.config.height/2, "Game Over!\nPress {R} To Restart\nPress {ESC} To Return To Menu", gameOverConfig).setOrigin(0.5);
+        this.add.text(game.config.width / 2, game.config.height / 2 - game.config.height / 5, "Game Over!", gameOverConfig).setOrigin(0.5);
+        gameOverConfig.fontSize = "30px";
+        this.add.text(game.config.width / 2, game.config.height / 2 + game.config.height / 5, "Press {R} To Restart\nPress {ESC} To Return To Menu", gameOverConfig).setOrigin(0.5);
+
 
         if (keyESC.isDown) {
             this.sound.play('sfx_select');
