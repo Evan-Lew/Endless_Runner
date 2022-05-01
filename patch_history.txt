@@ -1,3 +1,9 @@
+5/1
+beta version released !! 
+Add  all sound effect
+Add  credit page
+Fix  some bugs and optimization
+
 4/30
 move collsion function from asteroid to play_solo scene
 clean scene before restart:

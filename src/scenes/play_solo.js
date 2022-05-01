@@ -10,10 +10,11 @@ class Play_solo extends Phaser.Scene {
         //this.load.image("asteroid", "assets/test_asteroid.png");
 
         //audio
-        this.load.audio('sfx_rock_impact', './assets/asteroid_pass.mp3');
+        this.load.audio('sfx_rock_impact', './assets/rock_impact.wav');
         this.load.audio("sfx_spaceshipOnHit", "./assets/sfx_onHIt.wav");
+        this.load.audio('sfx_spaceshipOnHit0', './assets/0hp_onhit.wav'); 
         this.load.audio('sfx_select', './assets/select_menu.mp3');
-
+        this.load.audio('sfx_gameover', './assets/gameover.mp3');
         // Stars
         this.load.image('pink_starfield', './assets/pink_starfield.png');
         this.load.image('blue_starfield', './assets/blue_starfield.png');
@@ -43,7 +44,8 @@ class Play_solo extends Phaser.Scene {
         this.randomNum2 = 0;
         this.randomArr = [];
 
-        this.collisionFunc = false;      // on is collision is working, off is collision is not
+        this.collisionFunc = false;              // on is collision is working, off is collision is not
+        this.update_counter_func_endGame = 0;    // a counter that will keep increment, but used call function one time in update
 
         // Background
         this.planet = this.add.tileSprite(0, 0, 1280, 720, 'planet').setOrigin(0, 0);
@@ -100,7 +102,7 @@ class Play_solo extends Phaser.Scene {
         this.life_bar = this.add.sprite(100, 50, 'indicator_life');
         this.life_bar.play("hp5");
         // display timer init
-        this.display_timePassed = this.add.text(90, 70, this.timePassed, { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '32px', color: '#FFFFFF', });
+        this.display_timePassed = this.add.text(80, 70, this.timePassed, { fontFamily: 'PixelFont', fontSize: '32px', color: '#FFFFFF', });
 
 
         // timePassed increment
@@ -112,7 +114,7 @@ class Play_solo extends Phaser.Scene {
                         this.display_timePassed.destroy();   //destory previous timer
                         this.timePassed++;                   //increment timePassed
                         //display runtime timer
-                        this.display_timePassed = this.add.text(90, 70, this.timePassed, { align: 'center', fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '32px', color: '#FFFFFF', });
+                        this.display_timePassed = this.add.text(80, 70, this.timePassed, { align: 'center', fontFamily: 'PixelFont', fontSize: '32px', color: '#FFFFFF', });
 
                     } else {
                         this.timer_localTimer.remove(false); //turn off clockEvent  
@@ -242,7 +244,8 @@ class Play_solo extends Phaser.Scene {
             }
             this.Player1.destroy();
             this.collisionFunc = false;
-            this.endGame();
+            this.endGame(this.update_counter_func_endGame);
+            this.update_counter_func_endGame++;
         }
     }//update end
 
@@ -261,9 +264,14 @@ class Play_solo extends Phaser.Scene {
                 && Asteroid.y < Spaceship.y + Spaceship.height
                 && Asteroid.y + Asteroid.height > Spaceship.y) {
                 Spaceship.life -= 1;
+                //play two different sound effect
+                if(Spaceship.life == 0){
+                this.sound.play("sfx_spaceshipOnHit0");
+                }else{
+                this.sound.play("sfx_spaceshipOnHit");
+                }//if end
                 Asteroid.isUpdate = false;
                 this.cameras.main.shake(100, 0.005);
-                this.sound.play("sfx_spaceshipOnHit");
             }//if end
         }//flag check end
     }
@@ -341,7 +349,8 @@ class Play_solo extends Phaser.Scene {
         this.locationAssign(randomNum2);
     }
 
-    endGame() {
+    endGame(counter) {
+
         let gameOverConfig = {
             fontFamily: 'PixelFont',
             fontSize: "60px",
@@ -353,6 +362,22 @@ class Play_solo extends Phaser.Scene {
         gameOverConfig.fontSize = "30px";
         this.add.text(game.config.width / 2, game.config.height / 2 + game.config.height / 5, "Press {R} To Restart\nPress {ESC} To Return To Menu", gameOverConfig).setOrigin(0.5);
 
+
+        //play game over sound one time
+        if(counter == 0){
+        // play game over sound with delay
+        this.timer_endGame = this.time.addEvent({
+            delay: 400,                                     //every second call loop below
+            callback: () => {
+                {
+                    this.sound.play("sfx_gameover");
+                }
+            },
+            callbackScope: this,
+            loop: false
+        });//timePassed increment end
+        }else{
+        }//if end
 
         if (keyESC.isDown) {
             this.sound.play('sfx_select');

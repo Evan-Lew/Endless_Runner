@@ -9,8 +9,11 @@ class Menu_arrow extends Phaser.GameObjects.Sprite {
         this.moveSpeed_12 = 195;
         this.moveSpeed_23 = 200;
         this.moveSpeed_34 = 160;
+
+        this.scene = scene;
         //add sound effect
-        //this.sfxRocket = scene.sound.add('sfx_rocket');
+        this.sfx_move = scene.sound.add("move_menu");
+
     }
 
     update() {
@@ -18,12 +21,15 @@ class Menu_arrow extends Phaser.GameObjects.Sprite {
         if (Phaser.Input.Keyboard.JustDown(keyD) ) {         //move to right                     
             if(this.locate == 1){                                     
                 this.x += this.moveSpeed_12;
+                this.sfx_move.play();
                 this.locate++;
             }else if(this.locate == 2){
                 this.x += this.moveSpeed_23;
+                this.sfx_move.play();
                 this.locate++;
             }else if(this.locate == 3){
                 this.x += this.moveSpeed_34;
+                this.sfx_move.play();
                 this.locate++;
             }//inner if end
         }//if end
@@ -31,12 +37,15 @@ class Menu_arrow extends Phaser.GameObjects.Sprite {
         if (Phaser.Input.Keyboard.JustDown(keyA) ) {         //move to left
             if(this.locate == 2){
                 this.x -= this.moveSpeed_12;
+                this.sfx_move.play();
                 this.locate--;
             }else if(this.locate == 3){
                 this.x -= this.moveSpeed_23;
+                this.sfx_move.play();
                 this.locate--;
             }else if(this.locate == 4){
                 this.x -= this.moveSpeed_34;
+                this.sfx_move.play();
                 this.locate--;
             }//inner if end
         }//if end

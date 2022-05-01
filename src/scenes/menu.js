@@ -5,9 +5,8 @@ class Menu_1 extends Phaser.Scene {
 
     preload() {
         // Load sfx
-
         this.load.audio('sfx_select', './assets/select_menu.mp3');
-    
+        this.load.audio('move_menu', './assets/move_menu.wav');
         // preload background
         this.load.image('Menu_background', './assets/EndlessRunner1.2.png');
         // preload arrow 
@@ -47,7 +46,7 @@ class Menu_1 extends Phaser.Scene {
                 this.scene.start("tutorialScene");
             }else if(this.arrow.locate == 3){
                 this.sound.play('sfx_select');
-                console.log('TO DO: CREDIT');
+                this.scene.start("creditScene");
             }else if(this.arrow.locate == 4){
                 this.sound.play('sfx_select');
                 close();
