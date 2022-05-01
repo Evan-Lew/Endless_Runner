@@ -12,7 +12,7 @@ class Play_solo extends Phaser.Scene {
         //audio
         this.load.audio('sfx_rock_impact', './assets/rock_impact.wav');
         this.load.audio("sfx_spaceshipOnHit", "./assets/sfx_onHIt.wav");
-        this.load.audio('sfx_spaceshipOnHit0', './assets/0hp_onhit.wav'); 
+        this.load.audio('sfx_spaceshipOnHit0', './assets/0hp_onhit.wav');
         this.load.audio('sfx_select', './assets/select_menu.mp3');
         this.load.audio('sfx_gameover', './assets/gameover.mp3');
         // Stars
@@ -213,7 +213,7 @@ class Play_solo extends Phaser.Scene {
 
             if (ai.length != 0) {
                 //turn on collision
-                this.collisionFunc = true; 
+                this.collisionFunc = true;
                 // check collision for every asteroid exist
                 for (var i = 0; i < ai.length; i++) {
                     this.Collision_Aseteroid_VS_Spaceship(ai[i], this.Player1, this.collisionFunc);
@@ -265,10 +265,10 @@ class Play_solo extends Phaser.Scene {
                 && Asteroid.y + Asteroid.height > Spaceship.y) {
                 Spaceship.life -= 1;
                 //play two different sound effect
-                if(Spaceship.life == 0){
-                this.sound.play("sfx_spaceshipOnHit0");
-                }else{
-                this.sound.play("sfx_spaceshipOnHit");
+                if (Spaceship.life == 0) {
+                    this.sound.play("sfx_spaceshipOnHit0");
+                } else {
+                    this.sound.play("sfx_spaceshipOnHit");
                 }//if end
                 Asteroid.isUpdate = false;
                 this.cameras.main.shake(100, 0.005);
@@ -364,19 +364,19 @@ class Play_solo extends Phaser.Scene {
 
 
         //play game over sound one time
-        if(counter == 0){
-        // play game over sound with delay
-        this.timer_endGame = this.time.addEvent({
-            delay: 400,                                     //every second call loop below
-            callback: () => {
-                {
-                    this.sound.play("sfx_gameover");
-                }
-            },
-            callbackScope: this,
-            loop: false
-        });//timePassed increment end
-        }else{
+        if (counter == 0) {
+            // play game over sound with delay
+            this.timer_endGame = this.time.addEvent({
+                delay: 400,                                     //every second call loop below
+                callback: () => {
+                    {
+                        this.sound.play("sfx_gameover");
+                    }
+                },
+                callbackScope: this,
+                loop: false
+            });//timePassed increment end
+        } else {
         }//if end
 
         if (keyESC.isDown) {

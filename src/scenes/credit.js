@@ -33,13 +33,13 @@ class Credit extends Phaser.Scene {
     update() {
         if (!this.creditOver) {
             // -------------Background---------------------
-            this.creditBackground.tilePositionY += 0.7; 
+            this.creditBackground.tilePositionY += 0.7;
 
 
 
             this.totalMoveUp += 0.7;
             // stop scrolling when it's reach the end
-            if( this.totalMoveUp > 1350){
+            if (this.totalMoveUp > 1350) {
                 this.creditOver = true;
             }
         }

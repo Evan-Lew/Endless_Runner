@@ -3,6 +3,7 @@ beta version released !!
 Add  all sound effect
 Add  credit page
 Fix  some bugs and optimization
+Fix  html loading script
 
 4/30
 move collsion function from asteroid to play_solo scene

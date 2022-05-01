@@ -18,12 +18,12 @@ class Asteroid extends Phaser.GameObjects.Sprite {
         this.sfx_asteroid = scene.sound.add('sfx_rock_impact');
         this.sfx_onHit = scene.sound.add("sfx_spaceshipOnHit");
     }
-    
+
     update() {
         // Asteroid movement
         // When an asteroid is created in the scene, it will move toward where the player is when the asteroid is created at a speed of this.moveSpeed, with an acceleration of this.acceleration;
         this.moveX = this.moveDir.dot(new Phaser.Math.Vector2(1, 0));
-        this.moveY = this.moveDir.dot(new Phaser.Math.Vector2(0,1));
+        this.moveY = this.moveDir.dot(new Phaser.Math.Vector2(0, 1));
         this.moveSpeed += this.acceleration;
         this.x += this.moveX * this.moveSpeed;
         this.y += this.moveY * this.moveSpeed;
@@ -32,16 +32,16 @@ class Asteroid extends Phaser.GameObjects.Sprite {
         // The Vector2() function is defined in Main.js
         if (this.x + this.width >= game.config.width) {
             this.sfx_asteroid.play();
-            this.moveDir = this.moveDir.reflect(Vector2(-1,0));
-        } 
+            this.moveDir = this.moveDir.reflect(Vector2(-1, 0));
+        }
         if (this.x <= 0) {
             this.sfx_asteroid.play();
             this.moveDir = this.moveDir.reflect(Vector2(1, 0));
-        } 
+        }
         if (this.y + this.height >= game.config.height) {
             this.sfx_asteroid.play();
             this.moveDir = this.moveDir.reflect(Vector2(0, 1));
-        } 
+        }
         if (this.y <= 0) {
             this.sfx_asteroid.play();
             this.moveDir = this.moveDir.reflect(Vector2(0, -1));
@@ -62,6 +62,6 @@ class Asteroid extends Phaser.GameObjects.Sprite {
         */
     }
 
-    
+
 
 }

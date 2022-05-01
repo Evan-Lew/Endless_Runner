@@ -9,7 +9,7 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         this.isMoving = false;
         this.life = 5;
     }
-    
+
     update() {
         // Player 8 direction movement
         var hInput = keyRight_P1.isDown - keyLeft_P1.isDown;
@@ -23,21 +23,21 @@ class Spaceship extends Phaser.GameObjects.Sprite {
             this.y += moveY * this.moveSpeed;
             this.isMoving = true;
         }
-        
+
         if (hInput === 0 && vInput === 0) {
             this.isMoving = false;
         }
 
         if (this.isMoving === true && this.moveSpeed <= this.maxSpeed) {
             this.moveSpeed += this.acceleration;
-        } else if (this.isMoving === false){
+        } else if (this.isMoving === false) {
             this.moveSpeed = this.minSpeed;
         }
 
         // Player collision vs. borders
         if (this.x <= 0) {
             this.x = 0;
-        } 
+        }
         if (this.x + this.width >= game.config.width) {
             this.x = game.config.width - this.width;
         }

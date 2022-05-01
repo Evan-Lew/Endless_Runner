@@ -18,32 +18,32 @@ class Menu_arrow extends Phaser.GameObjects.Sprite {
 
     update() {
 
-        if (Phaser.Input.Keyboard.JustDown(keyD) ) {         //move to right                     
-            if(this.locate == 1){                                     
+        if (Phaser.Input.Keyboard.JustDown(keyD)) {         //move to right                     
+            if (this.locate == 1) {
                 this.x += this.moveSpeed_12;
                 this.sfx_move.play();
                 this.locate++;
-            }else if(this.locate == 2){
+            } else if (this.locate == 2) {
                 this.x += this.moveSpeed_23;
                 this.sfx_move.play();
                 this.locate++;
-            }else if(this.locate == 3){
+            } else if (this.locate == 3) {
                 this.x += this.moveSpeed_34;
                 this.sfx_move.play();
                 this.locate++;
             }//inner if end
         }//if end
 
-        if (Phaser.Input.Keyboard.JustDown(keyA) ) {         //move to left
-            if(this.locate == 2){
+        if (Phaser.Input.Keyboard.JustDown(keyA)) {         //move to left
+            if (this.locate == 2) {
                 this.x -= this.moveSpeed_12;
                 this.sfx_move.play();
                 this.locate--;
-            }else if(this.locate == 3){
+            } else if (this.locate == 3) {
                 this.x -= this.moveSpeed_23;
                 this.sfx_move.play();
                 this.locate--;
-            }else if(this.locate == 4){
+            } else if (this.locate == 4) {
                 this.x -= this.moveSpeed_34;
                 this.sfx_move.play();
                 this.locate--;

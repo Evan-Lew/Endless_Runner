@@ -26,28 +26,28 @@ class Menu_1 extends Phaser.Scene {
         this.background = this.add.tileSprite(0, 0, 1280, 720, 'Menu_background').setOrigin(0, 0);
         // load arrow
         this.arrow = new Menu_arrow(this, 310, 610, 'Menu_arrow').setOrigin(0, 0);
-        
+
     }
 
 
 
     update() {
         //update arrow
-        this.arrow.update();          
+        this.arrow.update();
 
 
         //enter key interaction
-        if (Phaser.Input.Keyboard.JustDown(keyEnter) ){
-            if(this.arrow.locate == 1){
+        if (Phaser.Input.Keyboard.JustDown(keyEnter)) {
+            if (this.arrow.locate == 1) {
                 this.sound.play('sfx_select');
                 this.scene.start("playSoloScene");
-            }else if(this.arrow.locate == 2){
+            } else if (this.arrow.locate == 2) {
                 this.sound.play('sfx_select');
                 this.scene.start("tutorialScene");
-            }else if(this.arrow.locate == 3){
+            } else if (this.arrow.locate == 3) {
                 this.sound.play('sfx_select');
                 this.scene.start("creditScene");
-            }else if(this.arrow.locate == 4){
+            } else if (this.arrow.locate == 4) {
                 this.sound.play('sfx_select');
                 close();
             }//inner if end
