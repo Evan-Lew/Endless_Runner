@@ -28,7 +28,6 @@ class Menu_1 extends Phaser.Scene {
         // load arrow
         this.arrow = new Menu_arrow(this, 310, 610, 'Menu_arrow').setOrigin(0, 0);
         
-
     }
 
 

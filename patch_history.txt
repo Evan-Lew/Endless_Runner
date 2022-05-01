@@ -1,3 +1,10 @@
+4/30
+move collsion function from asteroid to play_solo scene
+clean scene before restart:
+	destory all sprites in play_solo when flag endGame is on
+	disable collison when flag endGame is on
+add     <div style="font-family:PixelFont; position: absolute; left:-1000px; visibility:hidden;">.</div>
+	to preload the local font
 4/29
 test: git push
 4/28

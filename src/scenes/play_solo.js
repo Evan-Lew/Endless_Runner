@@ -43,6 +43,8 @@ class Play_solo extends Phaser.Scene {
         this.randomNum2 = 0;
         this.randomArr = [];
 
+        this.collisionFunc = false;      // on is collision is working, off is collision is not
+
         // Background
         this.planet = this.add.tileSprite(0, 0, 1280, 720, 'planet').setOrigin(0, 0);
         this.blue_starfield = this.add.tileSprite(0, 0, 1280, 720, 'blue_starfield').setOrigin(0, 0);
@@ -127,8 +129,6 @@ class Play_solo extends Phaser.Scene {
 
 
 
-
-
         // --------------Player Related----------------
 
         // Instantiate Spaceship
@@ -142,11 +142,7 @@ class Play_solo extends Phaser.Scene {
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         keyESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 
-        // --------------------------------------------
-
-
-
-
+        // -------------------------------------------
 
         // -------------Asteroid Related---------------
         // Instantiate Asteroids
@@ -192,7 +188,7 @@ class Play_solo extends Phaser.Scene {
     }
 
     update() {
-        console.log(this);
+        // console.log(this);
         if (!this.gameOver) {
             // -------------Background---------------------
             this.pink_starfield.tilePositionY -= 2.5;
@@ -212,8 +208,17 @@ class Play_solo extends Phaser.Scene {
                     }
                 }
             }
-            
-            
+
+            if (ai.length != 0) {
+                //turn on collision
+                this.collisionFunc = true; 
+                // check collision for every asteroid exist
+                for (var i = 0; i < ai.length; i++) {
+                    this.Collision_Aseteroid_VS_Spaceship(ai[i], this.Player1, this.collisionFunc);
+                }
+            }
+
+
             //  gameOver check + hp change
             if (this.Player1.life <= 0) {
                 this.life_bar.play("hp0");
@@ -230,12 +235,38 @@ class Play_solo extends Phaser.Scene {
                 this.life_bar.play("hp1");
             }//if end
         } else {
+            // gameover remove all sprite, and turn off collision
+            for (var i = 0; i < ai.length; i++) {
+                ai[i].isUpdate = false;
+                ai[i].destroy();
+            }
+            this.Player1.destroy();
+            this.collisionFunc = false;
             this.endGame();
         }
     }//update end
 
 
+    // Helper function that determine the collision
+    //     Aseteroid Collision vs. Spaceship
+    //     Using AABB Collision
+    Collision_Aseteroid_VS_Spaceship(Asteroid, Spaceship, flag) {
+        //use flag to check if this function is on or off
+        //   flag = false, turn off the collision
+        if (!flag) {
 
+        } else {
+            if (Asteroid.x < Spaceship.x + Spaceship.width
+                && Asteroid.x + Asteroid.width > Spaceship.x
+                && Asteroid.y < Spaceship.y + Spaceship.height
+                && Asteroid.y + Asteroid.height > Spaceship.y) {
+                Spaceship.life -= 1;
+                Asteroid.isUpdate = false;
+                this.cameras.main.shake(100, 0.005);
+                this.sound.play("sfx_spaceshipOnHit");
+            }//if end
+        }//flag check end
+    }
 
     //  Helper function that determine the spawning point
     //      argument: input_randomNum: number from 1-8, which number indicate a pair of number below
@@ -315,7 +346,7 @@ class Play_solo extends Phaser.Scene {
             fontFamily: 'PixelFont',
             fontSize: "60px",
             color: "#DF2121",
-    
+
         }
 
         this.add.text(game.config.width / 2, game.config.height / 2 - game.config.height / 5, "Game Over!", gameOverConfig).setOrigin(0.5);
@@ -328,11 +359,13 @@ class Play_solo extends Phaser.Scene {
             this.scene.start("menuScene_1");
         }
         if (Phaser.Input.Keyboard.JustDown(keyR)) {
+
             this.sound.play('sfx_select');
             this.scene.restart();
+
         }
 
     }
 
-}
+}//scene end
 
