@@ -7,7 +7,7 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         this.maxSpeed = 6;
         this.acceleration = 0.01;
         this.isMoving = false;
-        this.life = 1;
+        this.life = 5;
     }
     
     update() {
