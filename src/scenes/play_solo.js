@@ -28,7 +28,7 @@ class Play_solo extends Phaser.Scene {
         this.load.image("spaceship", "./assets/spaceship.png");
         // Life (5 heart)
         this.load.spritesheet('indicator_life', './assets/heart.png', { frameWidth: 172, frameHeight: 32 });
-    }//
+    }
 
     create() {
         // ----------Game/Enviroment settings----------
@@ -39,11 +39,36 @@ class Play_solo extends Phaser.Scene {
             frames: this.anims.generateFrameNames('ship_atlas', {
                 prefix: 'ship_move_',
                 start: 1,
-                end: 7,
+                end: 8,
                 suffix: '',
                 zeroPad: 4
             }),
             frameRate: 30,
+        });
+
+        this.anims.create({
+            key: 'ship_wreck',
+            frames: this.anims.generateFrameNames('ship_atlas', {
+                prefix: 'ship_wreck_',
+                start: 1,
+                end: 12,
+                suffix: '',
+                zeroPad: 4
+            }),
+            frameRate: 30,
+        });
+
+        // Ship move
+        this.anims.create({
+            key: 'ship_idle',
+            frames: this.anims.generateFrameNames('ship_atlas', {
+                prefix: 'ship_idle_',
+                start: 2,
+                end: 4,
+                suffix: '',
+                zeroPad: 4
+            }),
+            frameRate: 15,
         });
 
         // Scene local variable 
@@ -247,7 +272,8 @@ class Play_solo extends Phaser.Scene {
             } else if (this.Player1.life == 1) {
                 this.life_bar.play("hp1");
             }//if end
-        } else {
+        } else { 
+            //this.Player1.anims.play("ship_wreck"); // doesn't work 
             // gameover remove all sprite, and turn off collision
             for (var i = 0; i < ai.length; i++) {
                 ai[i].isUpdate = false;

@@ -17,11 +17,11 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         var moveDir = (new Phaser.Math.Vector2(hInput, vInput)).normalize();
         var moveX = moveDir.dot(new Phaser.Math.Vector2(1, 0));
         var moveY = moveDir.dot(new Phaser.Math.Vector2(0, 1));
-
+        
         if (keyUp_P1.isDown) {
-            this.play("ship_move", true);
+            this.anims.play("ship_move", true);
         }else{
-            this.play("ship_move", false);
+            this.anims.play("ship_move", false);
         }
 
         if (hInput != 0 | vInput != 0) {
