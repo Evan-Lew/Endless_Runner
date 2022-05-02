@@ -1,3 +1,7 @@
+5/2 
+Update the bgm from Intergalactic Odyssey.mp3 to Intergalactic Odyssey_8bit.WAV
+Update the code that plays the bgm so that it can stop playing when game over
+
 5/1
 beta version released !! 
 Add  all sound effect

@@ -93,8 +93,9 @@ class Play_solo extends Phaser.Scene {
         this.pink_starfield = this.add.tileSprite(0, 0, 1280, 720, 'pink_starfield').setOrigin(0, 0);
         
         // Background music
-        this.bgm = this.sound.play('bgm', {volume: 0.25});
-
+        this.bgm = this.sound.add('bgm', {volume: 0.5});
+        this.bgm.play();
+        console.log(this.bgm);
         // Border
         var graphics = this.add.graphics();
         graphics.lineStyle(2, 0x0033ff, 1);
@@ -280,6 +281,7 @@ class Play_solo extends Phaser.Scene {
                 ai[i].destroy();
             }
             this.Player1.destroy();
+            this.bgm.stop();
             this.collisionFunc = false;
             this.endGame(this.update_counter_func_endGame);
             this.update_counter_func_endGame++;
