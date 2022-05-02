@@ -6,9 +6,6 @@ class Play_solo extends Phaser.Scene {
 
     preload() {
         // ----------Load Sprites----------
-        //this.load.image("spaceship", "assets/test_spaceship.png");
-        //this.load.image("asteroid", "assets/test_asteroid.png");
-
         //audio
         this.load.audio('sfx_rock_impact', './assets/rock_impact.wav');
         this.load.audio("sfx_spaceshipOnHit", "./assets/sfx_onHIt.wav");
@@ -124,12 +121,6 @@ class Play_solo extends Phaser.Scene {
             callbackScope: this,
             loop: true
         });//timePassed increment end
-
-        // --------------------------------------------
-
-
-
-
 
         // --------------Player Related----------------
 

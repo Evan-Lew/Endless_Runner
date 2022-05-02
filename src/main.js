@@ -23,3 +23,27 @@ var ai = [];
 function Vector2(x, y) {
     return new Phaser.Math.Vector2(x, y);
 }
+
+/* ------Submission Description-----
+
+Collaborators: Laihong Xu, Evan Lew, Tiange Wei
+
+Title: Asteroid Dodger
+
+Completed 5/2
+
+Creative Tilt: 
+We are proud of the asteroid generation in the game that depends
+on creating a random number that determines the location of every
+asteroid. It took us a while to find the right location and timing
+for the asteroids to spawn in, while also balancing the difficulty of
+the game.
+
+For our visual style we think the background effect of having two backgrounds
+scrolling at different speeds creates nice look that pairs well with the planets.
+Another thing we liked was how when the ship gets hit the sounds effect and slight
+screen shake adds to the player urgency and experience.
+
+Credit:
+
+*/
