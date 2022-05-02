@@ -1,6 +1,6 @@
 class Spaceship extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, frame) {
-        super(scene, x, y, texture, frame);
+        super(scene, x, y, texture, frame, "ship_move");
         scene.add.existing(this);
         this.moveSpeed = 3;
         this.minSpeed = 3;
@@ -17,6 +17,12 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         var moveDir = (new Phaser.Math.Vector2(hInput, vInput)).normalize();
         var moveX = moveDir.dot(new Phaser.Math.Vector2(1, 0));
         var moveY = moveDir.dot(new Phaser.Math.Vector2(0, 1));
+
+        if (keyUp_P1.isDown) {
+            this.play("ship_move", true);
+        }else{
+            this.play("ship_move", false);
+        }
 
         if (hInput != 0 | vInput != 0) {
             this.x += moveX * this.moveSpeed;

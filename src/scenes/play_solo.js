@@ -6,12 +6,17 @@ class Play_solo extends Phaser.Scene {
 
     preload() {
         // ----------Load Sprites----------
-        //audio
+        // Atlas
+        this.load.atlas('ship_atlas', './assets/shipsheet.png', './assets/shipmap.json');
+
+        // Audio
         this.load.audio('sfx_rock_impact', './assets/rock_impact.wav');
         this.load.audio("sfx_spaceshipOnHit", "./assets/sfx_onHIt.wav");
         this.load.audio('sfx_spaceshipOnHit0', './assets/0hp_onhit.wav');
         this.load.audio('sfx_select', './assets/select_menu.mp3');
         this.load.audio('sfx_gameover', './assets/gameover.mp3');
+        // Background music
+        this.load.audio('bgm', './assets/Intergalactic Odyssey.mp3');
         // Stars
         this.load.image('pink_starfield', './assets/pink_starfield.png');
         this.load.image('blue_starfield', './assets/blue_starfield.png');
@@ -21,12 +26,25 @@ class Play_solo extends Phaser.Scene {
         this.load.image('asteroid', './assets/animated_asteroid.png');
         // Spaceship
         this.load.image("spaceship", "./assets/spaceship.png");
-        // life (5 heart)
+        // Life (5 heart)
         this.load.spritesheet('indicator_life', './assets/heart.png', { frameWidth: 172, frameHeight: 32 });
     }//
 
     create() {
         // ----------Game/Enviroment settings----------
+
+        // Ship move
+        this.anims.create({
+            key: 'ship_move',
+            frames: this.anims.generateFrameNames('ship_atlas', {
+                prefix: 'ship_move_',
+                start: 1,
+                end: 7,
+                suffix: '',
+                zeroPad: 4
+            }),
+            frameRate: 30,
+        });
 
         // Scene local variable 
         this.spawnTime = 1;             // every x seconds, Asteroid will be spawned
@@ -48,7 +66,9 @@ class Play_solo extends Phaser.Scene {
         this.planet = this.add.tileSprite(0, 0, 1280, 720, 'planet').setOrigin(0, 0);
         this.blue_starfield = this.add.tileSprite(0, 0, 1280, 720, 'blue_starfield').setOrigin(0, 0);
         this.pink_starfield = this.add.tileSprite(0, 0, 1280, 720, 'pink_starfield').setOrigin(0, 0);
-
+        
+        // Background music
+        this.bgm = this.sound.play('bgm', {volume: 0.25});
 
         // Border
         var graphics = this.add.graphics();
