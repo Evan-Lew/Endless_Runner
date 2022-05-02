@@ -16,7 +16,7 @@ class Play_solo extends Phaser.Scene {
         this.load.audio('sfx_select', './assets/select_menu.mp3');
         this.load.audio('sfx_gameover', './assets/gameover.mp3');
         // Background music
-        this.load.audio('bgm', './assets/Intergalactic Odyssey.mp3');
+        this.load.audio('bgm', './assets/Intergalactic Odyssey_8bit.WAV');
         // Stars
         this.load.image('pink_starfield', './assets/pink_starfield.png');
         this.load.image('blue_starfield', './assets/blue_starfield.png');
