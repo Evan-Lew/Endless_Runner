@@ -91,11 +91,11 @@ class Play_solo extends Phaser.Scene {
         this.planet = this.add.tileSprite(0, 0, 1280, 720, 'planet').setOrigin(0, 0);
         this.blue_starfield = this.add.tileSprite(0, 0, 1280, 720, 'blue_starfield').setOrigin(0, 0);
         this.pink_starfield = this.add.tileSprite(0, 0, 1280, 720, 'pink_starfield').setOrigin(0, 0);
-        
+
         // Background music
-        this.bgm = this.sound.add('bgm', {volume: 0.5});
-        this.bgm.play();
-        console.log(this.bgm);
+        this.bgm = this.sound.add('bgm', { volume: 0.5 });
+     //   this.bgm.play();
+
         // Border
         var graphics = this.add.graphics();
         graphics.lineStyle(2, 0x0033ff, 1);
@@ -194,11 +194,14 @@ class Play_solo extends Phaser.Scene {
                 {
                     if (this.gameOver) {
                         this.timer_spawnTimer_novice.remove(false);    //turn off clockEvent if game is over
-                    }// if end
-                    if (this.expertMode) {
-                        this.timer_spawnTimer_novice.remove(false);    //turn off clockEvent if expert mode is on
-                    }
-                    this.noviceGenerator(this.randomNum);
+                    } else {
+                        if (this.expertMode) {
+                            this.timer_spawnTimer_novice.remove(false);    //turn off clockEvent if expert mode is on
+                        } else {
+                            this.noviceGenerator(this.randomNum);
+                        }//inner if end
+
+                    }//if end
                 }
             },
             callbackScope: this,
@@ -214,8 +217,9 @@ class Play_solo extends Phaser.Scene {
                     {
                         if (this.gameOver) {
                             this.timer_spawnTimer_expert.remove(false);    //turn off clockEvent if game is over
-                        }// if end
-                        this.expertGenerator(this.randomNum, this.randomNum2, this.randomArr);
+                        } else {
+                            this.expertGenerator(this.randomNum, this.randomNum2, this.randomArr);
+                        }//if end
                     }
                 },
                 callbackScope: this,
@@ -273,16 +277,7 @@ class Play_solo extends Phaser.Scene {
             } else if (this.Player1.life == 1) {
                 this.life_bar.play("hp1");
             }//if end
-        } else { 
-            //this.Player1.anims.play("ship_wreck"); // doesn't work 
-            // gameover remove all sprite, and turn off collision
-            for (var i = 0; i < ai.length; i++) {
-                ai[i].isUpdate = false;
-                ai[i].destroy();
-            }
-            this.Player1.destroy();
-            this.bgm.stop();
-            this.collisionFunc = false;
+        } else {
             this.endGame(this.update_counter_func_endGame);
             this.update_counter_func_endGame++;
         }
@@ -402,8 +397,20 @@ class Play_solo extends Phaser.Scene {
         this.add.text(game.config.width / 2, game.config.height / 2 + game.config.height / 5, "Press {R} To Restart\nPress {ESC} To Return To Menu", gameOverConfig).setOrigin(0.5);
 
 
-        //play game over sound one time
+        // One time function in update
+        //   gameover case     
         if (counter == 0) {
+            //remove all sprite, and turn off collision
+            for (var i = 0; i < ai.length; i++) {
+                ai[i].isUpdate = false;
+                ai[i].destroy();
+            }
+            this.Player1.destroy();
+            this.bgm.stop();
+            this.collisionFunc = false;
+
+
+
             // play game over sound with delay
             this.timer_endGame = this.time.addEvent({
                 delay: 400,                                     //every second call loop below

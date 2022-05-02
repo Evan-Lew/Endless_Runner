@@ -8,6 +8,7 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         this.acceleration = 0.01;
         this.isMoving = false;
         this.life = 5;
+
     }
 
     update() {
@@ -17,9 +18,15 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         var moveDir = (new Phaser.Math.Vector2(hInput, vInput)).normalize();
         var moveX = moveDir.dot(new Phaser.Math.Vector2(1, 0));
         var moveY = moveDir.dot(new Phaser.Math.Vector2(0, 1));
-        
+
+
+
+        //this.angle = (this.x / this.y) * 360;
+
+   
         if (keyUp_P1.isDown) {
             this.anims.play("ship_move", true);
+
         }else{
             this.anims.play("ship_move", false);
         }
