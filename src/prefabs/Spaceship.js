@@ -50,17 +50,17 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         }
 
         // Player collision vs. borders
-        if (this.x <= 0) {
-            this.x = 0;
+        if (this.x - this.width/2 <= 0) {
+            this.x = this.width/2;
         }
-        if (this.x + this.width >= game.config.width) {
-            this.x = game.config.width - this.width;
+        if (this.x + this.width/2 >= game.config.width) {
+            this.x = game.config.width - this.width/2;
         }
-        if (this.y <= 0) {
-            this.y = 0;
+        if (this.y - this.height/2 <= 0) {
+            this.y = this.height/2;
         }
-        if (this.y + this.height >= game.config.height) {
-            this.y = game.config.height - this.height;
+        if (this.y + this.height/2 >= game.config.height) {
+            this.y = game.config.height - this.height/2;
         }
     }
 }
