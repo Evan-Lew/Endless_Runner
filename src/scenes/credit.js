@@ -39,8 +39,11 @@ class Credit extends Phaser.Scene {
 
             this.totalMoveUp += 0.7;
             // stop scrolling when it's reach the end
-            if (this.totalMoveUp > 1350) {
+            if (this.totalMoveUp > 2000) {
                 this.creditOver = true;
+                this.scene.start("menuScene_1");
+                //free memory
+                this.creditBackground.destroy();
             }
         }
 
@@ -48,6 +51,8 @@ class Credit extends Phaser.Scene {
         if (keyESC.isDown) {
             this.sound.play('sfx_select');
             this.scene.start("menuScene_1");
+            //free memory
+            this.creditBackground.destroy();
         }
     }// update end
 
