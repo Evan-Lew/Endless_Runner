@@ -294,10 +294,10 @@ class Play_solo extends Phaser.Scene {
         if (!flag) {
 
         } else {
-            if (Asteroid.x < Spaceship.x + Spaceship.width
-                && Asteroid.x + Asteroid.width > Spaceship.x
-                && Asteroid.y < Spaceship.y + Spaceship.height
-                && Asteroid.y + Asteroid.height > Spaceship.y) {
+            if (Asteroid.x < Spaceship.x - Spaceship.width/2 + Spaceship.width
+                && Asteroid.x + Asteroid.width/2 > Spaceship.x
+                && Asteroid.y < Spaceship.y - Spaceship.height/2 + Spaceship.height
+                && Asteroid.y + Asteroid.height/2 > Spaceship.y) {
                 Spaceship.life -= 1;
                 //play two different sound effect
                 if (Spaceship.life == 0) {
