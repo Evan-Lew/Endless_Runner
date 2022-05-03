@@ -95,7 +95,7 @@ class Play_solo extends Phaser.Scene {
 
         // Background music
         this.bgm = this.sound.add('bgm', { volume: 0.5 });
-        // this.bgm.play();
+        this.bgm.play();
 
         // Border
         var graphics = this.add.graphics();
