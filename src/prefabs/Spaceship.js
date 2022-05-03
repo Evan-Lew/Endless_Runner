@@ -9,9 +9,12 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         this.isMoving = false;
         this.life = 5;
 
+        this.original_x = this.x;
+        this.original_y = this.y;
     }
 
     update() {
+
         // Player 8 direction movement
         var hInput = keyRight_P1.isDown - keyLeft_P1.isDown;
         var vInput = keyDown_P1.isDown - keyUp_P1.isDown;
@@ -19,21 +22,18 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         var moveX = moveDir.dot(new Phaser.Math.Vector2(1, 0));
         var moveY = moveDir.dot(new Phaser.Math.Vector2(0, 1));
 
-
-
-        //this.angle = (this.x / this.y) * 360;
-
-   
-        if (keyUp_P1.isDown) {
-            this.anims.play("ship_move", true);
-
-        }else{
-            this.anims.play("ship_move", false);
-        }
-
         if (hInput != 0 | vInput != 0) {
+            //update original xy for angle calculation
+            this.original_x = this.x;
+            this.original_y = this.y;
+
+            //modify xy
             this.x += moveX * this.moveSpeed;
             this.y += moveY * this.moveSpeed;
+
+            //rotate space ship
+            this.rotation = Phaser.Math.Angle.Between(this.y, this.original_x, this.original_y, this.x);
+
             this.isMoving = true;
         }
 
@@ -42,8 +42,10 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         }
 
         if (this.isMoving === true && this.moveSpeed <= this.maxSpeed) {
+            this.anims.play("ship_move", true);
             this.moveSpeed += this.acceleration;
         } else if (this.isMoving === false) {
+            this.anims.play("ship_move", false);
             this.moveSpeed = this.minSpeed;
         }
 

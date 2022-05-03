@@ -94,7 +94,7 @@ class Play_solo extends Phaser.Scene {
 
         // Background music
         this.bgm = this.sound.add('bgm', { volume: 0.5 });
-        this.bgm.play();
+        // this.bgm.play();
 
         // Border
         var graphics = this.add.graphics();
@@ -171,7 +171,8 @@ class Play_solo extends Phaser.Scene {
         // --------------Player Related----------------
 
         // Instantiate Spaceship
-        this.Player1 = new Spaceship(this, game.config.width / 2, game.config.height / 2, "spaceship").setOrigin(0, 0);
+        this.Player1 = new Spaceship(this, game.config.width / 2, game.config.height / 2, "spaceship").setOrigin(0.5, 0.5);
+
 
         // Key Inputs (Player1)
         keyLeft_P1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
