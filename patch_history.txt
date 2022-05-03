@@ -3,6 +3,7 @@ Update the bgm from Intergalactic Odyssey.mp3 to Intergalactic Odyssey_8bit.WAV
 Update the code that plays the bgm so that it can stop playing when game over, so that the bgm won't overlap in next try.
 Update credit page (add Tiange to sound design)
 Add feature for spaceship to rotate when it's moving
+Add asteroid spawn animation
 5/1
 beta version released !! 
 Add  all sound effect

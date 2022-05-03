@@ -24,6 +24,7 @@ class Play_solo extends Phaser.Scene {
         this.load.image('planet', './assets/planet_1.png');
         // Asteroid
         this.load.image('asteroid', './assets/animated_asteroid.png');
+        this.load.spritesheet('asteroid_spawn', './assets/animated_asteroid_spawn.png', { frameWidth: 64, frameHeight: 64 });        
         // Spaceship
         this.load.image("spaceship", "./assets/spaceship.png");
         // Life (5 heart)
@@ -189,6 +190,14 @@ class Play_solo extends Phaser.Scene {
         //  Asteroid generator function
         //  run everycertain second, spawn the asteroid
         //      novice spawn 1 Asteroid at a time
+
+        this.anims.create({
+            key: "asteroid_spawn_anim",
+            frameRate: 10,
+            frames: this.anims.generateFrameNumbers('asteroid_spawn', { start: 0, end: 9 }),
+            repeat: 0
+        });
+
         this.timer_spawnTimer_novice = this.time.addEvent({
             delay: this.generationFrequency,                                               //every 3 seconds call loop below
             callback: () => {
